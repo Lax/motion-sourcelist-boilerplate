@@ -22,6 +22,7 @@ class MainWindowController < NSWindowController
   end
 
   def build_navigation
+
     children = []
 
     children << makeItem("Photos", 'photos', 3)
@@ -35,6 +36,19 @@ class MainWindowController < NSWindowController
     }
 
     @sourceListItems << @displayItem
+
+    children = []
+
+    children << makeItem("New Album", 'album', 0)
+    children << makeItem("Trip to Frisco", 'album', 19)
+    children << makeItem("New Album", 'album', 0)
+    children << makeItem("New Album", 'album', 0)
+
+    @displayItem = {
+      "Title" => 'ALBUMS',
+      "Children" => children
+    }
+
     @sourceListItems << @displayItem
   end
 
@@ -92,6 +106,7 @@ class MainWindowController < NSWindowController
     unless sourceList.levelForItem(item) == 0
       image_view.setImage item["Icon"] if image_view
       badge_view.badgeValue = item['Count']
+      badge_view.hidden = true if item['Count'] == 0
     end
 
     text_field.setStringValue item["Title"]

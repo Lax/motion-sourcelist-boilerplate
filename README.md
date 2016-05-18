@@ -4,6 +4,8 @@ RubyMotion boilerplate app for Mac OS X implementing PXSourceList
 
 ## Todo
 
+### SPRINT basic layout
+
 - [x] fix content van scrollview, alight to top
 - [x] voeg source list toe pxsourcelist
 - [x] pxsourcelist crash
@@ -12,16 +14,18 @@ RubyMotion boilerplate app for Mac OS X implementing PXSourceList
 - [x] source list afbeeldingen positioneren
 - [x] text positioneren
 - [x] badge implementeren
-- [ ] margin
-
+- [x] row margin
+- [x] align badge to right
+- [x] hide badge when zero
+- [ ] add addable album items
+- [x] voeg toolbar toe
+- [ ] show/hide sidebar knop
+- [ ] betere toolbar icon
+- [ ] documentatie voor github
+- [ ] rememeber last selected at start
 - [ ] is selected implementeren
 - [ ] window title
 - [ ] constanten
-- [ ] voeg toolbar toe
-- [ ] show/hide sidebar knop
-- [ ] documentatie voor github
-- [ ] rememeber last selected at start
-
 
 ## Off topoc
 - [ ] build shortcut

@@ -20,18 +20,19 @@ class MainWindowLayout < MK::WindowLayout
       end
 
       add NSView, :left_view do
-        background_color NSColor.blueColor
         constraints do
-          min_width 100
+          min_width 0
           max_width 300
           top.equals(:scroll_view_left, :top)
         end
 
+        set_autoresizes_subviews true
+
         add NSScrollView, :scroll_view_left do
           has_vertical_scroller true
           constraints do
-            min_width 300
-            min_height 200
+            left.equals(:left_view, :left)
+            right.equals(:left_view, :right)
             top.equals(:superview, :top)
             bottom.equals(:superview ,:bottom).minus 2
           end
@@ -63,6 +64,10 @@ class MainWindowLayout < MK::WindowLayout
   end
 
   def outline_view_style
+    constraints do
+      left.equals(:superview, :left)
+      right.equals(:superview, :right)
+    end
 
     focus_ring_type NSFocusRingTypeNone
     parent_bounds = v.superview.bounds
@@ -71,10 +76,10 @@ class MainWindowLayout < MK::WindowLayout
     header_view nil
 
     selection_highlight_style NSTableViewSelectionHighlightStyleSourceList
+    setColumnAutoresizingStyle NSTableViewFirstColumnOnlyAutoresizingStyle
 
     add_column @outline_view_column do
       editable false
-      width parent_bounds.size.width
     end
   end
 

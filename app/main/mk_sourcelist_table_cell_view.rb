@@ -12,7 +12,7 @@ class MKSourcelistTableCellView < MK::Layout
 
           constraints do
             left.equals(:superview, :left)
-            top.equals(:superview, :top).plus 3
+            top.equals(:superview, :top).plus 1
             width 20
             height 17
           end
