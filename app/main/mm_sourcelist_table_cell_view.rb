@@ -10,20 +10,28 @@ class MMSourcelistTableCellView < NSTableCellView
 
     setAutoresizingMask NSViewWidthSizable
 
-    @imageView = NSImageView.alloc.initWithFrame(NSMakeRect(0, 6, 16, 16))
+    @imageView = NSImageView.alloc.initWithFrame(NSMakeRect(0, 6, 16, 20))
     @imageView.setImageScaling(NSImageScaleProportionallyUpOrDown)
     @imageView.setImageAlignment(NSImageAlignCenter)
 
-    @textField = NSTextField.alloc.initWithFrame(NSMakeRect(21, 6, 200, 16))
+    @textField = NSTextField.alloc.initWithFrame(NSMakeRect(21, 6, 200, 20))
     @textField.setBordered false
-    @textField.setDrawsBackground true
-    @textField.stringValue = "hallo"
+    @textField.setDrawsBackground false
+
+    @badgeView = PXSourceListBadgeView.alloc.initWithFrame(NSMakeRect(164, 2, 22, 14))
 
     addSubview @imageView
     addSubview @textField
+    addSubview @badgeView
 
     self
+  end
 
+  def preflight
+  end
+
+  def setTitle title
+    @textField.stringValue = title
   end
 
   def setTextField textfield
@@ -40,6 +48,14 @@ class MMSourcelistTableCellView < NSTableCellView
 
   def imageView
     @imageView
+  end
+
+  def setBadgeView badgeView
+    @badgeView = badgeView
+  end
+
+  def badgeView
+    @badgeView
   end
 
 

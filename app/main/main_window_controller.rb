@@ -24,27 +24,32 @@ class MainWindowController < NSWindowController
   def build_navigation
     children = []
 
-    6.times do
-      photosImage = NSImage.imageNamed("photos")
-      photosImage.setTemplate(true)
-
-      child = {
-        "Title"=> 'title',
-        "Icon" => photosImage,
-        "Count" => 1
-      }
-        children << child
-
-    end
+    children << makeItem("Photos", 'photos', 3)
+    children << makeItem("Events", 'events', 338)
+    children << makeItem("People", 'people', 1244)
+    children << makeItem("Places", 'places', 30)
 
     @displayItem = {
-      "Title" => 'Cocoa Elements',
+      "Title" => 'LIBRARY',
       "Children" => children
     }
 
     @sourceListItems << @displayItem
     @sourceListItems << @displayItem
+  end
 
+
+  def makeItem title, image_title, count
+    image = NSImage.imageNamed(image_title)
+    image.setTemplate(true)
+
+    child = {
+      "Title"=> title,
+      "Icon" => image,
+      "Count" => count
+    }
+
+    child
   end
 
   def sourceList(sourceList, numberOfChildrenOfItem:item)
@@ -52,19 +57,11 @@ class MainWindowController < NSWindowController
   end
 
   def sourceList(sourceList,child:index, ofItem:item)
-#    item.nil? ? @displayItem : item["Children"][index]
     if !item
       return @sourceListItems[index]
     else
       item["Children"][index]
-
     end
-
-    # p "sourceList(aSourceList,child:index, ofItem:item) "
-    # p item
-
-#    return item.children.objectAtIndex(index)
-
   end
 
   def sourceList(sourceList, isItemExpandable:item)
@@ -79,16 +76,26 @@ class MainWindowController < NSWindowController
 
   def sourceList(sourceList, viewForItem:item)
 
-    photosImage = NSImage.imageNamed("photos")
-    photosImage.setTemplate(true)
-    p item
+    cell = MMSourcelistTableCellView.alloc.initWithFrame(NSMakeRect(0, 1, 189, 24))
 
-    cell = MMSourcelistTableCellView.alloc.initWithFrame(NSMakeRect(0, 1, 189, 14))
-    cell.textField = NSTextField.alloc.initWithFrame(NSMakeRect(25, 0, 130, 17))
-    cell.imageView = NSImageView.alloc.initWithFrame(NSMakeRect(3, 0, 17, 17))
+    if sourceList.levelForItem(item) == 0
 
-    cell.textField.stringValue = item["Title"]
-    cell.imageView.setImage photosImage
+      cell.textField.font = NSFont.boldSystemFontOfSize 12
+      cell.textField.textColor = NSColor.grayColor
+      cell.textField.frame = NSMakeRect(0, 2, 189, 18)
+      cell.badgeView.hidden = true
+    else
+
+      photosImage = NSImage.imageNamed("photos")
+      photosImage.setTemplate(true)
+
+      cell.textField.font = NSFont.systemFontOfSize 13
+      cell.imageView.setImage item["Icon"]
+
+      cell.badgeView.badgeValue = item['Count']
+    end
+
+    cell.textField.setStringValue item["Title"]
 
     cell
   end

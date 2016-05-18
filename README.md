@@ -1,5 +1,7 @@
 # Motion SourceList Boilerplate
 
+RubyMotion boilerplate app for Mac OS X implementing PXSourceList
+
 ## Todo
 
 - [x] fix content van scrollview, alight to top
@@ -16,4 +18,9 @@
 - [ ] voeg toolbar toe
 - [ ] show/hide sidebar knop
 - [ ] documentatie voor github
+- [ ] rememeber last selected at start
 
+
+## Off topoc
+- [ ] build shortcut
+- [ ] rubymotion enum
