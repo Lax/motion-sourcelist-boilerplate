@@ -30,7 +30,7 @@ class MainWindowLayout < MK::WindowLayout
         add NSScrollView, :scroll_view_left do
           has_vertical_scroller true
           constraints do
-            width 300
+            min_width 300
             min_height 200
             top.equals(:superview, :top)
             bottom.equals(:superview ,:bottom).minus 2

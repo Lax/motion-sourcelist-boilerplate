@@ -7,11 +7,13 @@ RubyMotion boilerplate app for Mac OS X implementing PXSourceList
 - [x] fix content van scrollview, alight to top
 - [x] voeg source list toe pxsourcelist
 - [x] pxsourcelist crash
-- [ ] sourcelist headers
-- [ ] sourcelist text
-- [ ] source list afbeeldingen positioneren
-- [ ] text positioneren
-- [ ] badge implementeren
+- [x] sourcelist headers
+- [x] sourcelist text
+- [x] source list afbeeldingen positioneren
+- [x] text positioneren
+- [x] badge implementeren
+- [ ] margin
+
 - [ ] is selected implementeren
 - [ ] window title
 - [ ] constanten

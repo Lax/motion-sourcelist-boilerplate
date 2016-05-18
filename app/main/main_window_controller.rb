@@ -71,31 +71,30 @@ class MainWindowController < NSWindowController
   #pragma mark - PXSourceList Delegate
 
   def sourceList(sourceList,isGroupAlwaysExpanded:group)
-    return true
+    true
+  end
+
+  def sourceList(sourceList, heightOfRowByItem:item)
+   26
   end
 
   def sourceList(sourceList, viewForItem:item)
 
-    cell = MMSourcelistTableCellView.alloc.initWithFrame(NSMakeRect(0, 1, 189, 24))
+    layout = MKSourcelistTableCellView.new
+    layout.is_header = true if sourceList.levelForItem(item) == 0
+    layout.build
 
-    if sourceList.levelForItem(item) == 0
+    cell = layout.get(:root)
+    text_field = layout.get(:text_field)
+    image_view = layout.get(:image_view)
+    badge_view = layout.get(:badge_view)
 
-      cell.textField.font = NSFont.boldSystemFontOfSize 12
-      cell.textField.textColor = NSColor.grayColor
-      cell.textField.frame = NSMakeRect(0, 2, 189, 18)
-      cell.badgeView.hidden = true
-    else
-
-      photosImage = NSImage.imageNamed("photos")
-      photosImage.setTemplate(true)
-
-      cell.textField.font = NSFont.systemFontOfSize 13
-      cell.imageView.setImage item["Icon"]
-
-      cell.badgeView.badgeValue = item['Count']
+    unless sourceList.levelForItem(item) == 0
+      image_view.setImage item["Icon"] if image_view
+      badge_view.badgeValue = item['Count']
     end
 
-    cell.textField.setStringValue item["Title"]
+    text_field.setStringValue item["Title"]
 
     cell
   end
