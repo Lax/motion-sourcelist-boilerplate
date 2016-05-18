@@ -1,38 +1,21 @@
 # Motion SourceList Boilerplate
 
-RubyMotion boilerplate app for Mac OS X implementing PXSourceList
+RubyMotion boilerplate app for Mac OS X implementing a view based Source List. Using
+Motion Kit for interface layout and PXSourceList for the SourceList
+itself.
 
-## Todo
+- No Nib's, Xib's, all GUI stuff is coded!
+- View Based Source List
+- All elements positioned with Auto Layout (even the NSSplitView)
 
-### SPRINT basic layout
-- [x] fix content van scrollview, alight to top
-- [x] voeg source list toe pxsourcelist
-- [x] pxsourcelist crash
-- [x] sourcelist headers
-- [x] sourcelist text
-- [x] source list afbeeldingen positioneren
-- [x] text positioneren
-- [x] badge implementeren
-- [x] row margin
-- [x] align badge to right
-- [x] hide badge when zero
-- [x] voeg toolbar toe
-- [x] window title
+![image](http://picdrop.t3lab.com/bmNCELrJk4.png)
 
-### Sprint Before Github Push
-- [ ] show/hide sidebar knop werkend
-- [ ] beter toolbar icon
-- [ ] documentatie voor github
-- [ ] is selected implementeren
-- [ ] show something in body of selected module
-- [ ] iconen iets naar beneden
+## Contributing
 
-### Backlog
-- [ ] betere toolbar setup
-- [ ] constanten
-- [ ] rememeber last selected at start
-- [ ] add addable album items
+Your help is welcome! Please send pull requests.
 
-## Off topoc
-- [ ] build shortcut
-- [ ] rubymotion enum
+1. Fork it ( https://github.com/mipmip/motion-sourcelist-boilerplate/fork )
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create a new Pull Request

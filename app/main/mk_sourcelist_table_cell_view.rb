@@ -12,7 +12,7 @@ class MKSourcelistTableCellView < MK::Layout
 
           constraints do
             left.equals(:superview, :left)
-            top.equals(:superview, :top).plus 1
+            top.equals(:superview, :top).plus 4
             width 20
             height 17
           end
@@ -39,6 +39,7 @@ class MKSourcelistTableCellView < MK::Layout
           font NSFont.systemFontOfSize(13)
         end
 
+        editable false
         setBordered false
         setDrawsBackground false
         constraints do

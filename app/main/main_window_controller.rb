@@ -1,4 +1,7 @@
 class MainWindowController < NSWindowController
+  SideBarIdentifier = 'SideBarIdentifier'
+
+  attr_accessor :controller
 
   def layout
     @layout ||= MainWindowLayout.new
@@ -7,11 +10,28 @@ class MainWindowController < NSWindowController
   def init
     super.tap do
       self.window = layout.window
+
+      toolbar = NSToolbar.alloc.initWithIdentifier "MyToolbar"
+
+      toolbar.setAllowsUserCustomization true
+      toolbar.setAutosavesConfiguration true
+      toolbar.setDisplayMode NSToolbarDisplayModeIconAndLabel
+
+      toolbar.setDelegate self
+
+      self.window.setToolbar toolbar
+
     end
 
     @sourceListItems = []
 
     build_navigation
+
+    @left_view = @layout.get(:left_view)
+    @content_label = @layout.get(:content_label)
+    @splitView = @layout.get(:split_view)
+    @splitView.adjustSubviews
+    @splitView.setPosition(200.0, ofDividerAtIndex:0)
 
     @outline_view = @layout.get(:outline_view)
     @outline_view.outlineTableColumn = @layout.outline_view_column
@@ -19,7 +39,50 @@ class MainWindowController < NSWindowController
     @outline_view.dataSource = self
 
     @outline_view.reloadData
+
   end
+
+  # this is the handler the above snippet refers to
+  def mainSplitViewWillResizeSubviewsHandler(object)
+    @lastSplitViewSubViewLeftWidth = @left_view.frame.size.width
+  end
+
+  # wire this to the UI control you wish to use to toggle the
+  # expanded/collapsed state of splitViewSubViewLeft
+  def toggleSidebar(sender)
+
+    frame = @left_view.frame
+
+    if frame.size.width == 0.0
+      @splitView.setPosition(200.0, ofDividerAtIndex:0)
+    else
+      @splitView.setPosition(0.0, ofDividerAtIndex:0)
+    end
+
+  end
+
+  def toolbarAllowedItemIdentifiers(toolbar)
+    [SideBarIdentifier, NSToolbarFlexibleSpaceItemIdentifier, NSToolbarSpaceItemIdentifier, NSToolbarSeparatorItemIdentifier]
+  end
+
+  def toolbarDefaultItemIdentifiers(toolbar)
+    [SideBarIdentifier]
+  end
+
+  def toolbar(toolbar, itemForItemIdentifier:identifier, willBeInsertedIntoToolbar:flag)
+    if identifier == SideBarIdentifier
+      image = NSImage.imageNamed('sidebar')
+      image.setTemplate(true)
+
+      item = NSToolbarItem.alloc.initWithItemIdentifier identifier
+      item.label = "Toggle Sidebar"
+      item.image = image
+      item.target = self
+      item.action = :"toggleSidebar:"
+      item
+    end
+  end
+
 
   def build_navigation
 
@@ -40,7 +103,7 @@ class MainWindowController < NSWindowController
     children = []
 
     children << makeItem("New Album", 'album', 0)
-    children << makeItem("Trip to Frisco", 'album', 19)
+    children << makeItem("Trip to Amsterdam", 'album', 19)
     children << makeItem("New Album", 'album', 0)
     children << makeItem("New Album", 'album', 0)
 
@@ -89,7 +152,7 @@ class MainWindowController < NSWindowController
   end
 
   def sourceList(sourceList, heightOfRowByItem:item)
-   26
+    26
   end
 
   def sourceList(sourceList, viewForItem:item)
@@ -113,5 +176,17 @@ class MainWindowController < NSWindowController
 
     cell
   end
+
+  def sourceListSelectionDidChange(notification)
+
+    selectedItem = @outline_view.itemAtRow(@outline_view.selectedRow)
+
+    if selectedItem
+      @content_label.setStringValue selectedItem['Title']
+    else
+      @content_label.setStringValue "Welcome... please select a menu item."
+    end
+  end
+
 
 end

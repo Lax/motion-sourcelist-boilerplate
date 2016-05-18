@@ -52,12 +52,31 @@ class MainWindowLayout < MK::WindowLayout
         end
 
         add NSView, :right_view_content do
+
           constraints do
             top.equals(:right_view, :top).plus 5
             bottom.equals(:right_view, :bottom).minus 5
             left.equals(:right_view, :left).plus 5
             right.equals(:right_view, :right).minus 5
           end
+
+          add NSTextField, :content_label do
+
+            text_color NSColor.grayColor
+            font NSFont.systemFontOfSize(25)
+            setBordered false
+            alignment NSTextAlignmentCenter
+            setDrawsBackground false
+            editable false
+            constraints do
+              center.equals(:right_view_content)
+              width 300
+              height 37
+            end
+
+          end
+
+
         end
       end
     end
