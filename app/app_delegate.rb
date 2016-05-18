@@ -12,8 +12,12 @@ class AppDelegate
     toolbar.setDisplayMode NSToolbarDisplayModeIconAndLabel
 
     toolbar.setDelegate self
+
+    appName =NSBundle.mainBundle.infoDictionary.objectForKey "CFBundleDisplayName"
+
     @main_controller = MainWindowController.alloc.init
     @main_controller.window.setToolbar toolbar
+    @main_controller.window.setTitle appName
     #    @main_controller.showWindow(self)
     @main_controller.window.orderFrontRegardless
   end
