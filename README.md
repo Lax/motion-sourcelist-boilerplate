@@ -10,6 +10,10 @@ itself.
 
 ![image](http://picdrop.t3lab.com/bmNCELrJk4.png)
 
+## Compile
+
+Before compiling make sure to run ```bundle install``` and ```rake pod:install```
+
 ## Contributing
 
 Your help is welcome! Please send pull requests.

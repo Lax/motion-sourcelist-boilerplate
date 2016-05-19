@@ -38,8 +38,7 @@
 - [ ] drag/drop items
 
 ### Publiceren
-- [ ] cocoacontrols
-- [ ] twitter
-- [ ] github
-- [ ] stackechange
-- [ ] linkedin?
+- [x] cocoacontrols
+- [x] twitter
+- [x] github
+- [x] stackechange
